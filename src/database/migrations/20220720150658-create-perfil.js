@@ -1,12 +1,17 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Perfils', {
+    await queryInterface.createTable('Perfiles', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        primaryKey: true
+      },
+      user_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'users',
+          key: 'id',
+        }        
       },
       codigo: {
         type: Sequelize.STRING
@@ -44,11 +49,8 @@ module.exports = {
       avatar_rrhh: {
         type: Sequelize.STRING
       },
-      avatar_usuario: {
-        type: Sequelize.STRING
-      },
       supervisor_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       activo: {
         type: Sequelize.BOOLEAN
@@ -57,25 +59,25 @@ module.exports = {
         type: Sequelize.DATE
       },
       inactividad_motivo_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       sexo_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       estadocivil_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       sucursal_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       area_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       sector_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       categoria_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       createdAt: {
         allowNull: false,
@@ -84,10 +86,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Perfils');
+    await queryInterface.dropTable('Perfiles');
   }
-};
+}

@@ -5,7 +5,7 @@ const logger = require('morgan')
 const cors = require('cors')
 require('dotenv').config()
 
-const indexRouter = require('./src/modules/router/routerIndex')
+const indexRouter = require('./src/modules/routersIndex')
 
 const port = process.env.PORT
 

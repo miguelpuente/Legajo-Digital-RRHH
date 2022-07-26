@@ -10,11 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+
     }
   }
   Perfil.init({
     codigo: DataTypes.STRING,
+    user_id: DataTypes.UUID,
     nombre: DataTypes.STRING,
     apellido: DataTypes.STRING,
     fecha_nacimiento: DataTypes.DATE,
@@ -26,20 +27,21 @@ module.exports = (sequelize, DataTypes) => {
     email_empresa: DataTypes.STRING,
     fecha_ingreso: DataTypes.DATE,
     avatar_rrhh: DataTypes.STRING,
-    avatar_usuario: DataTypes.STRING,
-    supervisor_id: DataTypes.INTEGER,
+    supervisor_id: DataTypes.UUID,
     activo: DataTypes.BOOLEAN,
     fecha_inactividad: DataTypes.DATE,
-    inactividad_motivo_id: DataTypes.INTEGER,
-    sexo_id: DataTypes.INTEGER,
-    estadocivil_id: DataTypes.INTEGER,
-    sucursal_id: DataTypes.INTEGER,
-    area_id: DataTypes.INTEGER,
-    sector_id: DataTypes.INTEGER,
-    categoria_id: DataTypes.INTEGER
+    inactividad_motivo_id: DataTypes.UUID,
+    sexo_id: DataTypes.UUID,
+    estadocivil_id: DataTypes.UUID,
+    sucursal_id: DataTypes.UUID,
+    area_id: DataTypes.UUID,
+    sector_id: DataTypes.UUID,
+    categoria_id: DataTypes.UUID
   }, {
     sequelize,
     modelName: 'Perfil',
+    timestamps: true,
+    paranoid: true,
   });
   return Perfil;
-};
+}
