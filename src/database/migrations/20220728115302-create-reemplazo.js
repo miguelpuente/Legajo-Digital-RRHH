@@ -1,25 +1,25 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Localidades', {
+    await queryInterface.createTable('Reemplazos', {
       id: {
+        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true
+        defaultValue: Sequelize.UUID
       },
-      provincia_id: {
+      colaborador_id: {
         type: Sequelize.UUID,
-          references: {
-            model: 'Provincias',
-            key: 'id',
-          },
-        allowNull: false,
+        references: {
+          model: "Colaboradores",
+          key: "id"
+        }
       },
-      nombre: {
-        type: Sequelize.STRING
-      },
-      codigopostal: {
-        type: Sequelize.STRING
+      puesto_colaborador_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: "Colaborador_Puestos",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Localidades');
+    await queryInterface.dropTable('Reemplazos');
   }
 };

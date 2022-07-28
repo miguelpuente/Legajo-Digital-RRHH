@@ -3,58 +3,48 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Domicilios', {
       id: {
+        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true
+        defaultValue: Sequelize.UUID
       },
-      relacion_id: {
-        type: Sequelize.UUID
+      relacionId: {
+        field: 'relacion_id',
+        type: Sequelize.INTEGER,
+        references: null
       },
-      relacion_type: {
-        type: Sequelize.STRING
+      relacionType: {
+        field: 'relacion_type',
+        type: Sequelize.STRING,
       },
       calle: {
         type: Sequelize.STRING
       },
       numero: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
-      departamento: {
+      entre_calle_uno: {
+        type: Sequelize.STRING
+      },
+      entre_calle_dos: {
         type: Sequelize.STRING
       },
       piso: {
         type: Sequelize.STRING
       },
-      barrio_id: {
-        type: Sequelize.UUID,
-          references: {
-            model: 'Barrios',
-            key: 'id',
-          },
-        allowNull: false,
-      },
-      entre_calle_uno: {
+      departamento: {
         type: Sequelize.STRING
-      },
-      altura_calle_uno: {
-        type: Sequelize.INTEGER
-      },
-      entre_calle_dos: {
-        type: Sequelize.STRING
-      },
-      altura_calle_dos: {
-        type: Sequelize.INTEGER
       },
       localidad_id: {
-        type: Sequelize.UUID,
-          references: {
-            model: 'Localidades',
-            key: 'id',
-          },
-          allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Localidades",
+          key: "id"
+        }
       },
-      observaciones: {
-        type: Sequelize.TEXT
+      activo: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,

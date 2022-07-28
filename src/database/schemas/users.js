@@ -1,11 +1,4 @@
 exports.userRegister = {
-    nombre: {
-      isString: { errorMessage: 'Nombre no es string' },
-      exists: {
-        errorMessage: 'Falta Nombre',
-        options: { checkFalsy: true },
-      },
-    },
     email: {
       isEmail: { errorMessage: 'Email no válido' },
       exists: {

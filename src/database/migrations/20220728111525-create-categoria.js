@@ -1,17 +1,26 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Barrios', {
+    await queryInterface.createTable('Categorias', {
       id: {
+        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true
+        defaultValue: Sequelize.UUID
+      },
+      sindicato_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: "Sindicatos",
+          key: "id"
+        }
       },
       nombre: {
         type: Sequelize.STRING
       },
-      observaciones: {
-        type: Sequelize.TEXT
+      activo: {
+        type: Sequelize.DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Barrios');
+    await queryInterface.dropTable('Categorias');
   }
 };

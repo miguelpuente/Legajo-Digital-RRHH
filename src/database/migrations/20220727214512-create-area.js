@@ -1,26 +1,26 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Empresas', {
+    await queryInterface.createTable('Areas', {
       id: {
+        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true
+        defaultValue: Sequelize.UUID
       },
-      codigo: {
-        type: Sequelize.STRING
+      empresa_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: "empresas",
+          key: "id"
+        }
       },
-      cuit: {
-        type: Sequelize.STRING
-      },
-      telefono: {
-        type: Sequelize.STRING
-      },
-      email: {
+      nombre: {
         type: Sequelize.STRING
       },
       activo: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Empresas');
+    await queryInterface.dropTable('Areas');
   }
 }
