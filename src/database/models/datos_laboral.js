@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Datos_Laboral.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     colaborador_id: DataTypes.UUID,
     nro_legajo: DataTypes.INTEGER,
     fecha_ingreso: DataTypes.DATE,

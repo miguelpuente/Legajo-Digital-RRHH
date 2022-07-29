@@ -5,7 +5,7 @@ module.exports = {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4
       },
       colaborador_id: {
         type: Sequelize.UUID,

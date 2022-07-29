@@ -5,7 +5,7 @@ module.exports = {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4
       },
       empresa_id: {
         type: Sequelize.UUID,
@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       activo: {
-        type: Sequelize.DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false
       },

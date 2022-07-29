@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Domicilio.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     relacion_id: DataTypes.UUID,
     relacion_type: DataTypes.STRING,
     calle: DataTypes.STRING,
@@ -23,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     piso: DataTypes.STRING,
     departamento: DataTypes.STRING,
     localidad_id: DataTypes.INTEGER,
-    activo: DataTypes.BOOLEAN
+    activo: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {
     sequelize,
     modelName: 'Domicilio',

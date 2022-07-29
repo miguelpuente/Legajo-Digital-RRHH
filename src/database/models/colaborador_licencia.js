@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Colaborador_licencia.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     colaborador_id: DataTypes.UUID,
     licencia_tipo: DataTypes.UUID,
     fecha_pedido: DataTypes.DATE,
@@ -22,7 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     fecha_incorporacion: DataTypes.DATE,
     completado: DataTypes.BOOLEAN,
     observaciones: DataTypes.TEXT,
-    activo: DataTypes.BOOLEAN
+    activo: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {
     sequelize,
     modelName: 'Colaborador_licencia',

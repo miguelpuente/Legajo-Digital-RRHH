@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Familiar.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     colaborador_id: DataTypes.UUID,
     relacion_familiar_id: DataTypes.UUID,
     sexo_id: DataTypes.UUID,
@@ -21,7 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     apellido: DataTypes.STRING,
     telefono: DataTypes.STRING,
     email: DataTypes.STRING,
-    activo: DataTypes.BOOLEAN
+    activo: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {
     sequelize,
     modelName: 'Familiar',

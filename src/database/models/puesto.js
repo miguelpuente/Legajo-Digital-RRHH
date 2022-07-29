@@ -14,10 +14,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Puesto.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     empresa_id: DataTypes.UUID,
     nombre: DataTypes.STRING,
     observaciones: DataTypes.TEXT,
-    activo: DataTypes.BOOLEAN
+    activo: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {
     sequelize,
     modelName: 'Puesto',

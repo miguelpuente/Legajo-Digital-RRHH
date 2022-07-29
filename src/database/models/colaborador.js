@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Colaborador.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     user_id: DataTypes.UUID,
     sucursal_id: DataTypes.UUID,
     sector_id: DataTypes.UUID,
@@ -26,7 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     apellido: DataTypes.STRING,
     telefono: DataTypes.STRING,
     email: DataTypes.STRING,
-    activo: DataTypes.BOOLEAN
+    activo: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {
     sequelize,
     modelName: 'Colaborador',
