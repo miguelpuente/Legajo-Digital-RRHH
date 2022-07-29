@@ -1,3 +1,12 @@
+exports.uuid = {
+  id: {
+    isUUID: { errorMessage: 'id no es UUID' },
+    exists: {
+      errorMessage: 'Falta id',
+    },
+  }
+}
+
 exports.empresa = {
   nombre: {
     isString: { errorMessage: 'Nombre no es string' },
@@ -6,7 +15,7 @@ exports.empresa = {
     },
   },
   cuit: {
-    isString: { errorMessage: 'Nombre no es string' },
+    isString: { errorMessage: 'Cuit no es string' },
     exists: {
       errorMessage: 'Falta CUIT',
     },

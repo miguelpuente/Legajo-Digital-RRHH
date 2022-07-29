@@ -1,3 +1,13 @@
+exports.uuid = {
+  id: {
+    isUUID: { errorMessage: 'id no es UUID' },
+    exists: {
+      errorMessage: 'Falta id',
+      options: { checkFalsy: true },
+    },
+  },
+}
+
 exports.userRegister = {
   email: {
     isEmail: { errorMessage: 'Email no válido' },
@@ -29,22 +39,21 @@ exports.userRegister = {
   }
 }
 
-  exports.userLogin = {
-    email: {
-      isEmail: { errorMessage: 'Email no válido' },
-      exists: {
-        errorMessage: 'Falta Email',
-        options: { checkFalsy: true },
-      },
-      isString: { errorMessage: 'email no es string' },
+exports.userLogin = {
+  email: {
+    isEmail: { errorMessage: 'Email no válido' },
+    exists: {
+      errorMessage: 'Falta Email',
+      options: { checkFalsy: true },
     },
-    password: {
-      isString: { errorMessage: 'password no es string' },
-      exists: {
-        errorMessage: 'Falta password',
-        options: { checkFalsy: true },
-      },
-      isStrongPassword: true,
-      errorMessage: 'Password dévil',
+    isString: { errorMessage: 'email no es string' },
+  },
+  password: {
+    isString: { errorMessage: 'password no es string' },
+    exists: {
+      errorMessage: 'Falta password',
+      options: { checkFalsy: true },
     },
-  }
+    isStrongPassword: { errorMessage: 'Password dévil' },
+  },
+}

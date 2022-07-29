@@ -5,14 +5,16 @@ const { generateToken} = require('../../../middlewares/jwt')
 
 exports.getAllUsers = async () => {
   const users = await Users.findAll({
-    attributes: ['id', 'email', 'avatar', 'activo'],
+    attributes: ['id', 'email', 'avatar'],
   })
   return users
 }
 
 exports.getUserByPk = async (id) => {
   try {
-    const user = await Users.findByPk( id )
+    const user = await Users.findByPk( id, {
+      attributes: ['id', 'email', 'avatar']
+    })
     return user
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
