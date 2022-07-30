@@ -21,7 +21,7 @@ exports.area = {
       },
     },
     activo: {
-      isBoolean: { errorMessage: 'avatar no es boolean' },
+      isBoolean: { errorMessage: 'activo no es boolean' },
       optional: { nullable: true, checkFalsy: true },
     },
   }

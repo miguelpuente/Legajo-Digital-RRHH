@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Sucursal.belongsTo( models.Empresa, { as: 'empresa', foreignKey: 'empresa_id' })
     }
   }
   Sucursal.init({
@@ -31,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Sucursal',
+    tableName: 'sucursales',
     timestamps: true,
     paranoid: true
   });

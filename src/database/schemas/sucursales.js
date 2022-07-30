@@ -7,15 +7,15 @@ exports.uuid = {
   }
 }
 
-exports.empresa = {
-  nombre: {
-    isString: { errorMessage: 'Nombre no es string' },
+exports.sucursal = {
+  empresa_id: {
+    isUUID: { errorMessage: 'EmpresaId no es UUID' },
     exists: {
       errorMessage: 'Falta Nombre',
     },
   },
-  cuit: {
-    isString: { errorMessage: 'Cuit no es string' },
+  nombre: {
+    isString: { errorMessage: 'Nombre no es string' },
     exists: {
       errorMessage: 'Falta CUIT',
     },

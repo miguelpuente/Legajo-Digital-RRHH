@@ -3,7 +3,7 @@ const { Area } = require('../../../database/models')
 const { getEmpresaByPk } = require('../../empresas/services/empresas.services')
 
 exports.getAllAreas = async () => {
-  const area = await Area.findAll(  )
+  const area = await Area.findAll()
   return area
 }
 

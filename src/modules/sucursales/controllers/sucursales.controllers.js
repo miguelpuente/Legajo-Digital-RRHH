@@ -2,21 +2,21 @@ const createHttpError = require('http-errors')
 const { ErrorObject } = require('../../../helpers/error')
 const { endpointResponse } = require('../../../helpers/success')
 const { catchAsync } = require('../../../helpers/catchAsync')
-const { getAreaByPk, getAllAreas,createArea, destroyArea, updateAreaById } = require('../services/areas.services')
+const { getSucursalByPk, getAllSucursales, createSucursal, destroySucursal, updateSucursalById } = require('../services/sucursales.services')
 
 module.exports = {
   show: catchAsync(async (req, res, next) => {
     try {
-      const area = await getAreaByPk(req.params.id)
+      const sucursal = await getSucursalByPk(req.params.id)
       endpointResponse({
         res,
-        message: 'Datos de Area',
-        body: area,
+        message: 'Datos de Sucursal',
+        body: sucursal,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error area dato ] - [area - GET]: ${error.message}`,
+        `[Error sucursal dato ] - [sucursal - GET]: ${error.message}`,
       )
       next(httpError)
     }
@@ -24,16 +24,16 @@ module.exports = {
 
   list: catchAsync(async (req, res, next) => {
     try {
-      const area = await getAllAreas()
+      const sucursal = await getAllSucursales()
       endpointResponse({
         res,
-        message: 'Listado Areas',
-        body: area,
+        message: 'Listado Sucursales',
+        body: sucursal,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error area listado ] - [area - GET]: ${error.message}`,
+        `[Error sucursal listado ] - [sucursal - GET]: ${error.message}`,
       )
       next(httpError)
     }
@@ -41,16 +41,16 @@ module.exports = {
 
   register: catchAsync(async (req, res, next) => {
     try {
-      const area = await createArea(req.body)
+      const sucursal = await createSucursal(req.body)
       endpointResponse({
         res,
-        message: 'Area creada exitosamente',
-        body: area,
+        message: 'Sucursal creada exitosamente',
+        body: sucursal,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error creando area] - [area - REGISTER]: ${error.message}`,
+        `[Error creando sucursal] - [sucursal - REGISTER]: ${error.message}`,
       )
       next(httpError)
     }
@@ -58,16 +58,16 @@ module.exports = {
 
   update: catchAsync(async (req, res, next) => {
     try {
-      const area = await updateAreaById(req)
+      const sucursal = await updateSucursalById(req)
       endpointResponse({
         res,
-        message: 'Area actualizada exitosamente',
-        body: area,
+        message: 'Sucursal actualizada exitosamente',
+        body: sucursal,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error actualizando area] - [area - UPDATE]: ${error.message}`,
+        `[Error actualizando sucursal] - [sucursal - UPDATE]: ${error.message}`,
       )
       next(httpError)
     }
@@ -75,16 +75,16 @@ module.exports = {
 
   destroy: catchAsync(async (req, res, next) => {
     try {
-      const area = await destroyArea(req.params.id)
+      const sucursal = await destroySucursal(req.params.id)
       endpointResponse({
         res,
-        message: 'Area eliminada exitosamente',
-        body: area,
+        message: 'Sucursal eliminada exitosamente',
+        body: sucursal,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error borrando area] - [area - DESTROY]: ${error.message}`,
+        `[Error borrando sucursal] - [sucursal - DESTROY]: ${error.message}`,
       )
       next(httpError)
     }
