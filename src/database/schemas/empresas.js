@@ -34,3 +34,25 @@ exports.empresa = {
     optional: { nullable: true, checkFalsy: true },
   },
 }
+
+exports.empresaUpdate = {
+  nombre: {
+    isString: { errorMessage: 'Nombre no es string' },
+    exists: {
+      errorMessage: 'Falta Nombre',
+    },
+  },
+  telefono: {
+    isString: { errorMessage: 'Telefono no es string' },
+  },
+  email: {
+    isEmail: { errorMessage: 'Email no válido' },
+    exists: {
+      errorMessage: 'Falta Email',
+    },
+  },
+  activo: {
+    isBoolean: { errorMessage: 'activo no es boolean' },
+    optional: { nullable: true, checkFalsy: true },
+  },
+}

@@ -29,8 +29,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Motivos_Inactividad',
+    tableName: 'RRHH_Motivos_Inactividades',
     timestamps: true,
     paranoid: true
-  });
-  return Motivos_Inactividad;
-};
+  })
+  return Motivos_Inactividad
+}

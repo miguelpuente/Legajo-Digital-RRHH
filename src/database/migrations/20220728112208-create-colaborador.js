@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Colaboradores', {
+    await queryInterface.createTable('RRHH_Colaboradores', {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
@@ -24,28 +24,28 @@ module.exports = {
       sector_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Sectores",
+          model: "RRHH_Sectores",
           key: "id"
         }
       },
       area_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Areas",
+          model: "RRHH_Areas",
           key: "id"
         }
       },
       superior_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Colaboradores",
+          model: "RRHH_Colaboradores",
           key: "id"
         }
       },
       categoria_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Categorias",
+          model: "RRHH_Categorias",
           key: "id"
         }
       },
@@ -59,7 +59,7 @@ module.exports = {
       estado_civil_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Estados_Civiles",
+          model: "RRHH_Estados_Civiles",
           key: "id"
         }
       },
@@ -95,6 +95,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Colaboradors');
+    await queryInterface.dropTable('RRHH_Colaboradores');
   }
-};
+}

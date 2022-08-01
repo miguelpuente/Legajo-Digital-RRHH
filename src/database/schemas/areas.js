@@ -11,13 +11,13 @@ exports.area = {
     empresa_id: {
       isUUID: { errorMessage: 'EmpresaId no es UUID' },
       exists: {
-        errorMessage: 'Falta Nombre',
+        errorMessage: 'Falta EmpresaId',
       },
     },
     nombre: {
       isString: { errorMessage: 'Nombre no es string' },
       exists: {
-        errorMessage: 'Falta CUIT',
+        errorMessage: 'Falta nombre',
       },
     },
     activo: {
@@ -25,3 +25,4 @@ exports.area = {
       optional: { nullable: true, checkFalsy: true },
     },
   }
+  

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Categorias', {
+    await queryInterface.createTable('RRHH_Categorias', {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
@@ -10,7 +10,7 @@ module.exports = {
       sindicato_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Sindicatos",
+          model: "RRHH_Sindicatos",
           key: "id"
         }
       },
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Categorias');
+    await queryInterface.dropTable('RRHH_Categorias');
   }
 };

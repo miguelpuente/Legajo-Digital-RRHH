@@ -31,8 +31,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Licencia_tipo',
+    tableName: 'RRHH_Licencia_Tipos',
     timestamps: true,
     paranoid: true
   });
   return Licencia_tipo;
-};
+}

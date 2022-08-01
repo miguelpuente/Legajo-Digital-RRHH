@@ -31,8 +31,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Colaborador_Puesto',
+    tableName: 'RRHH_Colaborador_Puestos',
     timestamps: true,
     paranoid: true
   });
   return Colaborador_Puesto;
-};
+}

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Familiares', {
+    await queryInterface.createTable('RRHH_Familiares', {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
@@ -10,14 +10,14 @@ module.exports = {
       colaborador_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Colaboradores",
+          model: "RRHH_Colaboradores",
           key: "id"
         }
       },
       relacion_familiar_id: {
         type: Sequelize.UUID,
         references: {
-          model: "Relaciones_Familiares",
+          model: "RRHH_Relaciones_Familiares",
           key: "id"
         }
       },
@@ -41,7 +41,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       activo: {
-        type: Sequelize.DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false
       },
@@ -60,6 +60,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Familiares');
+    await queryInterface.dropTable('RRHH_Familiares');
   }
 }

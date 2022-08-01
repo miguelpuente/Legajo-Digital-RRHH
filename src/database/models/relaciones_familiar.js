@@ -28,8 +28,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Relaciones_Familiar',
+    tableName: 'RRHH_Relaciones_Familiares',
     timestamps: true,
     paranoid: true
-  });
-  return Relaciones_Familiar;
-};
+  })
+  return Relaciones_Familiar
+}

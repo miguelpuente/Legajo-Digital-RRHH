@@ -7,7 +7,7 @@ exports.uuid = {
   }
 }
 
-exports.sucursal = {
+exports.sector = {
   empresa_id: {
     isUUID: { errorMessage: 'EmpresaId no es UUID' },
     exists: {
@@ -18,15 +18,6 @@ exports.sucursal = {
     isString: { errorMessage: 'Nombre no es string' },
     exists: {
       errorMessage: 'Falta nombre',
-    },
-  },
-  telefono: {
-    isString: { errorMessage: 'Telefono no es string' },
-  },
-  email: {
-    isEmail: { errorMessage: 'Email no válido' },
-    exists: {
-      errorMessage: 'Falta Email',
     },
   },
   activo: {
