@@ -54,7 +54,8 @@ exports.updateAreaById = async (req) => {
     const area = await Area.findByPk(id)
     if (area) {
       await Area.update({ empresa_id, nombre, activo, },{ where: { id: area.id } },)
-          return Area
+      const newArea = await Area.findByPk(id)
+      return newArea
     } else {
       throw new ErrorObject('Area no existe', 404)
     }

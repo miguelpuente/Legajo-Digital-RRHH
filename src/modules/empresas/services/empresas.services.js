@@ -78,16 +78,17 @@ exports.updateEmpresaById = async (req) => {
     const { nombre, cuit, telefono, email, activo, } = req.body
     const empresa = await Empresa.findByPk(id)
     if (empresa) {
-      if ( this.verifyCuit(cuit) ) {
-        if (!(await this.getEmpresaByCuit(cuit)) ) {
-          await Empresa.update({ nombre, cuit, telefono, email, activo, },{ where: { id: empresa.id } },)
-          return Empresa
-        } else {
-          throw new ErrorObject('CUIT ya fue registrado', 404)
-        }
-      } else {
-        throw new ErrorObject('CUIT no válido', 404)
-      }
+      //if ( this.verifyCuit(cuit) ) {
+        //if (!(await this.getEmpresaByCuit(cuit)) ) {
+          await Empresa.update({ nombre, telefono, email, activo, },{ where: { id: empresa.id } },)
+          const newEmpresa = await Empresa.findByPk(empresa.id)
+          return newEmpresa
+        //} else {
+        //  throw new ErrorObject('CUIT ya fue registrado', 404)
+        //}
+      //} else {
+      //  throw new ErrorObject('CUIT no válido', 404)
+      //}
     } else {
       throw new ErrorObject('Empresa no existe', 404)
     }
