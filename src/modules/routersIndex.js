@@ -6,6 +6,7 @@ const areas = require('./areas/areas.router')
 const sucursales = require('./sucursales/sucursales.router')
 const sectores = require('./sectores/sectores.router')
 const puestos = require('./puestos/puestos.router')
+const sindicatos = require('./sindicatos/sindicatos.router')
 
 const router = express.Router()
 
@@ -16,5 +17,6 @@ router.use('/areas', areas)
 router.use('/sucursales', sucursales)
 router.use('/sectores', sectores)
 router.use('/puestos', puestos)
+router.use('/sindicatos', sindicatos)
 
 module.exports = router

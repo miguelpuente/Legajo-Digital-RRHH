@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Empresa.hasMany( models.Area, { as: 'areas', foreignKey:'empresa_id' })
       Empresa.hasMany( models.Sucursal, { as: 'sucursales', foreignKey: 'empresa_id' })
+      Empresa.hasMany( models.Sector, { as: 'sectores', foreignKey:'empresa_id' })
+      Empresa.hasMany( models.Puesto, { as: 'puestos', foreignKey:'empresa_id' })
+      Empresa.belongsToMany( models.Sindicato, { as: 'sindicatos', through: 'rrhh_empresas_sindicatos', foreignKey: 'empresa_id' } )
     }
   }
   Empresa.init({
