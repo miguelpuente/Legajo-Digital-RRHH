@@ -22,11 +22,16 @@ exports.getPuestoByPk = async (id) => {
 
 exports.createPuesto = async (body) => {
   try {
+    const { empresa_id } = body
+    if (await getEmpresaByPk(empresa_id)) {
       const newPuesto = await Puesto.create(body)
       if (!newPuesto) {
         throw new ErrorObject('Falló registro de Puesto', 404)
       }
       return newPuesto
+    } else {
+      throw new ErrorObject('Empresa no existe', 404)
+    }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

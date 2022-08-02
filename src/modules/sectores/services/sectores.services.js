@@ -22,11 +22,16 @@ exports.getSectorByPk = async (id) => {
 
 exports.createSector = async (body) => {
   try {
+    const { empresa_id } = body
+    if (await getEmpresaByPk(empresa_id)) {
       const newSector = await Sector.create(body)
       if (!newSector) {
         throw new ErrorObject('Falló registro de sector', 404)
       }
-      return newSector
+      return newSector 
+    } else {
+      throw new ErrorObject('Empresa no existe', 404)
+    }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

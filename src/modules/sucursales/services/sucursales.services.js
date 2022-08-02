@@ -22,11 +22,16 @@ exports.getSucursalByPk = async (id) => {
 
 exports.createSucursal = async (body) => {
   try {
+    const { empresa_id } = body
+    if (await getEmpresaByPk(empresa_id)) {
       const newSucursal = await Sucursal.create(body)
       if (!newSucursal) {
         throw new ErrorObject('Falló registro de sucursal', 404)
       }
-      return newSucursal
+      return newSucursal 
+    } else {
+      throw new ErrorObject('Empresa no existe', 404)
+    }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

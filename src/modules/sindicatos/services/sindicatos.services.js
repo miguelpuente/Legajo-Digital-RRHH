@@ -12,7 +12,7 @@ exports.getSindicatoByPk = async (id) => {
     if (sindicato) {
       return sindicato
     } else {
-      throw new ErrorObject('Puesto no existe', 404)
+      throw new ErrorObject('Sindicato no existe', 404)
     }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
@@ -23,7 +23,7 @@ exports.createSindicato = async (body) => {
   try {
       const newSindicato = await Sindicato.create(body)
       if (!newSindicato) {
-        throw new ErrorObject('Falló registro de Puesto', 404)
+        throw new ErrorObject('Falló registro de Sindicato', 404)
       }
       return newSindicato
   } catch (error) {

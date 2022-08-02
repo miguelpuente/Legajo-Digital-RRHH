@@ -22,11 +22,16 @@ exports.getAreaByPk = async (id) => {
 
 exports.createArea = async (body) => {
   try {
+    const { empresa_id } = body
+    if (await getEmpresaByPk(empresa_id)) {
       const newArea = await Area.create(body)
       if (!newArea) {
         throw new ErrorObject('Falló registro de area', 404)
       }
-      return newArea
+      return newArea 
+    } else {
+      throw new ErrorObject('Empresa no existe', 404)
+    }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

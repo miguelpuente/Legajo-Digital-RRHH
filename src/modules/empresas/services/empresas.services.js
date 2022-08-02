@@ -1,5 +1,6 @@
 const { ErrorObject } = require('../../../helpers/error')
-const { Empresa } = require('../../../database/models')
+const { Empresa, Empresas_Sindicato } = require('../../../database/models')
+const { getSindicatoByPk } = require('../../sindicatos/services/sindicatos.services')
 
 exports.getAllEmpresas = async () => {
   const empresa = await Empresa.findAll()
@@ -104,6 +105,60 @@ exports.destroyEmpresa = async (id) => {
       await Empresa.destroy({ where: { id: empresa.id } })
     } else {
       throw new ErrorObject('Empresa no existe', 404)
+    }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.createEmpresaSindicato = async (empresa_id, sindicato_id) => {
+  try {
+    if (!(await getSindicatoByPk(sindicato_id))) {
+      throw new ErrorObject('Sindicato no existe', 404)
+    }
+    if (!(await this.getEmpresaByPk(empresa_id))) {
+      throw new ErrorObject('Empresa no existe', 404)
+    }
+    if (!(await this.getAsociacionEmpresaSindicato(empresa_id, sindicato_id))) {
+      const empresaSindicato = await Empresas_Sindicato.create({empresa_id, sindicato_id})
+      return empresaSindicato
+    } else {
+      throw new ErrorObject('Ya existe asociación', 404)
+    }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.getSindicatoByEmpresaPk = async (empresa_id) => {
+  try {
+    if ((await this.getEmpresaByPk(empresa_id))) {
+      const sindicatos = await Empresas_Sindicato.findAll({where: { empresa_id }})
+      return sindicatos
+    } else {
+      throw new ErrorObject('Empresa no existe', 404)
+    }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.getAsociacionEmpresaSindicato = async (empresa_id, sindicato_id) => {
+  try {
+    const empresaSindicato = await Empresas_Sindicato.findOne({where: { empresa_id, sindicato_id}})
+    return empresaSindicato
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.destroyEmpresaSindicato = async (empresa_id, sindicato_id) => {
+  try {
+    const empresaSindicato = await Empresas_Sindicato.findOne({where: { empresa_id, sindicato_id}})
+    if (empresaSindicato) {
+      await Empresas_Sindicato.destroy({ where: { id: empresaSindicato.id } })
+    } else {
+      throw new ErrorObject('Empresa-Sindicato no existe', 404)
     }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)

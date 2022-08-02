@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
       Empresa.hasMany( models.Sucursal, { as: 'sucursales', foreignKey: 'empresa_id' })
       Empresa.hasMany( models.Sector, { as: 'sectores', foreignKey:'empresa_id' })
       Empresa.hasMany( models.Puesto, { as: 'puestos', foreignKey:'empresa_id' })
-      Empresa.belongsToMany( models.Sindicato, { as: 'sindicatos', through: 'rrhh_empresas_sindicatos', foreignKey: 'empresa_id' } )
+      Empresa.belongsToMany( models.Sindicato, { through: 'rrhh_empresas_sindicatos', foreignKey: 'empresa_id' } )
+      Empresa.hasMany( models.Empresas_Sindicato, {foreignKey:'empresa_id' })
     }
   }
   Empresa.init({

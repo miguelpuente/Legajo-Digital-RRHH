@@ -1,8 +1,7 @@
 const createHttpError = require('http-errors')
-const { ErrorObject } = require('../../../helpers/error')
 const { endpointResponse } = require('../../../helpers/success')
 const { catchAsync } = require('../../../helpers/catchAsync')
-const { getEmpresaByPk, getAllEmpresas, createEmpresa, destroyEmpresa, updateEmpresaById } = require('../services/empresas.services')
+const { getEmpresaByPk, getAllEmpresas, createEmpresa, destroyEmpresa, updateEmpresaById, getSindicatoByEmpresaPk, createEmpresaSindicato, destroyEmpresaSindicato } = require('../services/empresas.services')
 
 module.exports = {
   show: catchAsync(async (req, res, next) => {
@@ -16,7 +15,7 @@ module.exports = {
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error user dato ] - [user - GET]: ${error.message}`,
+        `[Error empresa dato ] - [empresa - GET]: ${error.message}`,
       )
       next(httpError)
     }
@@ -80,6 +79,60 @@ module.exports = {
         res,
         message: 'Empresa eliminada exitosamente',
         body: empresa,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error borrando empresa] - [empresa - DESTROY]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  registerEmpresaSindicato: catchAsync(async (req, res, next) => {
+    try {
+      const { empresa_id, sindicato_id } = req.params
+      const sindicato = await createEmpresaSindicato(empresa_id, sindicato_id)
+      endpointResponse({
+        res,
+        message: 'Sindicato asociado exitosamente',
+        body: sindicato,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error creando sindicato] - [sindicato - REGISTER]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  getEmpresaSindicato: catchAsync(async (req, res, next) => {
+    try {
+      const { empresa_id } = req.params
+      const sindicatos = await getSindicatoByEmpresaPk(empresa_id)
+      endpointResponse({
+        res,
+        message: 'Listado Sindicato',
+        body: sindicatos,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error listando sindicato-empresa] - [sindicato-empresa - GET]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  destroyEmpresaSindicato: catchAsync(async (req, res, next) => {
+    try {
+      const { empresa_id, sindicato_id } = req.params
+      const sindicato = await destroyEmpresaSindicato(empresa_id, sindicato_id)
+      endpointResponse({
+        res,
+        message: 'Sindicato eliminado exitosamente',
+        body: sindicato,
       })
     } catch (error) {
       const httpError = createHttpError(
