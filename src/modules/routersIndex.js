@@ -8,6 +8,9 @@ const sectores = require('./sectores/sectores.router')
 const puestos = require('./puestos/puestos.router')
 const sindicatos = require('./sindicatos/sindicatos.router')
 const categorias = require('./categorias/categorias.router')
+const colaboradores_puestos = require('./colaborador_puestos/colaboradores_puestos.router')
+const estados_civiles = require('./estados_civiles/estados_civiles.router')
+const sexos = require('./sexos/sexos.router')
 
 const router = express.Router()
 
@@ -20,5 +23,8 @@ router.use('/sectores', sectores)
 router.use('/puestos', puestos)
 router.use('/sindicatos', sindicatos)
 router.use('/categorias', categorias)
+router.use('/colaboradorpuesto', colaboradores_puestos)
+router.use('/estadosciviles', estados_civiles)
+router.use('/sexos', sexos)
 
 module.exports = router
