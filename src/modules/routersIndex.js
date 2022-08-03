@@ -12,6 +12,8 @@ const colaboradores_puestos = require('./colaborador_puestos/colaboradores_puest
 const estados_civiles = require('./estados_civiles/estados_civiles.router')
 const sexos = require('./sexos/sexos.router')
 const relaciones_familiares = require('./relaciones_familiares/relaciones_familiares.router')
+const familiares = require('./familiares/familiares.router')
+const colaboradores = require('./colaboradores/colaboradores.router')
 
 const router = express.Router()
 
@@ -28,5 +30,7 @@ router.use('/colaboradorpuesto', colaboradores_puestos)
 router.use('/estadosciviles', estados_civiles)
 router.use('/sexos', sexos)
 router.use('/relacionesfamiliares', relaciones_familiares)
+router.use('/familiares', familiares)
+router.use('/colaboradores', colaboradores)
 
 module.exports = router
