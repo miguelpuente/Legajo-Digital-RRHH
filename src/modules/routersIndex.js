@@ -15,6 +15,7 @@ const relaciones_familiares = require('./relaciones_familiares/relaciones_famili
 const familiares = require('./familiares/familiares.router')
 const colaboradores = require('./colaboradores/colaboradores.router')
 const licencias_tipos = require('./licencias_tipos/licencias_tipos.router')
+const motivos_inactividades = require('./motivos_inactividades/motivos_inactividades.router')
 
 const router = express.Router()
 
@@ -34,5 +35,6 @@ router.use('/relacionesfamiliares', relaciones_familiares)
 router.use('/familiares', familiares)
 router.use('/colaboradores', colaboradores)
 router.use('/licenciastipos', licencias_tipos)
+router.use('/motivosinactividades', motivos_inactividades)
 
 module.exports = router
