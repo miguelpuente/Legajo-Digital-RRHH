@@ -1,11 +1,11 @@
 exports.uuid = {
-    id: {
-      isUUID: { errorMessage: 'id no es UUID' },
-      exists: {
-        errorMessage: 'Falta id',
-      },
-    }
+  id: {
+    isUUID: { errorMessage: 'id no es UUID' },
+    exists: {
+      errorMessage: 'Falta id',
+    },
   }
+}
   
 exports.licencia_tipo = {
   nombre: {
