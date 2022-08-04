@@ -37,10 +37,10 @@ exports.createPuesto = async (body) => {
   }
 }
 
-exports.getPuestoByEmpresaId = async (empresaId) => {
+exports.getPuestoByEmpresaId = async (empresa_id) => {
   try {
-    const puesto = await Puesto.findAll({ where: { empresaId } })
-    return puesto
+    const puestos = await Puesto.findAll({ where: { empresa_id } })
+    return puestos
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
