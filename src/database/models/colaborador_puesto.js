@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Colaborador, { as:'colaborador', foreignKey: 'colaborador_id' });
-      this.belongsTo(models.Puesto, { as: 'puesto', foreignKey: 'puesto_id' });
-      this.hasMany( models.Reemplazo, { as: 'reemplazo', foreignKey: 'puesto_colaborador_id' } )
+      Colaborador_Puesto.belongsTo(models.Colaborador, { as:'colaborador', foreignKey: 'colaborador_id' });
+      Colaborador_Puesto.belongsTo(models.Puesto, { as: 'puesto', foreignKey: 'puesto_id' });
+      Colaborador_Puesto.hasMany( models.Reemplazo, { as: 'reemplazo', foreignKey: 'puesto_colaborador_id' } )
     }
   }
   Colaborador_Puesto.init({
@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     colaborador_id: DataTypes.UUID,
     puesto_id: DataTypes.UUID,
-    fecha_inicio: DataTypes.DATE,
-    fecha_fin: DataTypes.DATE,
+    fecha_inicio: DataTypes.DATEONLY,
+    fecha_fin: DataTypes.DATEONLY,
     activo: {
       type: DataTypes.BOOLEAN,
       defaultValue: true

@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       fecha_ingreso: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       telefono: {
         type: Sequelize.STRING
@@ -34,7 +34,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       fecha_inactividad: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,

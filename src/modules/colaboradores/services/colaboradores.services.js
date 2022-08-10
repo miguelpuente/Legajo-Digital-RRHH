@@ -1,5 +1,6 @@
 const { ErrorObject } = require('../../../helpers/error')
 const { Colaborador, Colaborador_Puesto } = require('../../../database/models')
+const { getPuestoByPk } = require('../../puestos/services/puestos.services')
 
 exports.getAllColaboradores = async () => {
   const colaboradores = await Colaborador.findAll(  )
@@ -22,6 +23,7 @@ exports.getColaboradorByPk = async (id) => {
 exports.createColaborador = async (body) => {
   try {
       const newColaborador = await Colaborador.create(body)
+      return newColaborador
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -73,3 +75,31 @@ exports.getPuestosByColaboradorPk = async (id) => {
   }
 }
 
+exports.createColaboradorPuesto = async (req) => {
+  try {
+    const { colaborador_id, puesto_id } = req.params
+    if (!(await getPuestoByPk(puesto_id))) {
+      throw new ErrorObject('Puesto no existe', 404)
+    }
+    if (!(await this.getColaboradorByPk(colaborador_id))) {
+      throw new ErrorObject('Colaborador no existe', 404)
+    }
+    if (!(await this.getAsociacionColaboradorPuesto(colaborador_id, puesto_id))) {
+      const colaboradorPuesto = await Colaborador_Puesto.create({colaborador_id, puesto_id})
+      return colaboradorPuesto
+    } else {
+      throw new ErrorObject('Ya existe asociación', 404)
+    }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.getAsociacionColaboradorPuesto = async (colaborador_id, puesto_id) => {
+  try {
+    const colaboradorPuesto = await Colaborador_Puesto.findOne({where: { colaborador_id, puesto_id}})
+    return colaboradorPuesto
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}

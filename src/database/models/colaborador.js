@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       Colaborador.belongsTo(models.Colaborador,{ as:'supervisor', foreignKey:'superior_id' });
       Colaborador.hasMany(models.Colaborador, { as:'colaboradores', foreignKey: 'superior_id' });
       Colaborador.hasMany(models.Reemplazo, { as: 'reemplazos', foreignKey: 'colaborador_id' })
+      Colaborador.hasMany( models.Datos_Laboral, { as: 'datolaboral', foreignKey:'colaborador_id' })
     }
   }
   Colaborador.init({

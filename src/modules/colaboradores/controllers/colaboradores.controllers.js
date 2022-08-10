@@ -2,7 +2,7 @@ const createHttpError = require('http-errors')
 const { ErrorObject } = require('../../../helpers/error')
 const { endpointResponse } = require('../../../helpers/success')
 const { catchAsync } = require('../../../helpers/catchAsync')
-const { getColaboradorByPk, getAllColaboradores, createColaborador, destroyColaborador, updateColaboradorById } = require('../services/colaboradores.services')
+const { getColaboradorByPk, getAllColaboradores, createColaborador, destroyColaborador, updateColaboradorById, createColaboradorPuesto } = require('../services/colaboradores.services')
 
 module.exports = {
     show: catchAsync(async (req, res, next) => {
@@ -51,6 +51,23 @@ module.exports = {
         const httpError = createHttpError(
           error.statusCode,
           `[Error creando colaborador] - [colaborador - REGISTER]: ${error.message}`,
+        )
+        next(httpError)
+      }
+    }),
+
+    registerColaboradorPuesto: catchAsync(async (req, res, next) => {
+      try {
+        const colaborador_puesto = await createColaboradorPuesto(req)
+        endpointResponse({
+          res,
+          message: 'Colaborador_puesto actualizado exitosamente',
+          body: colaborador_puesto,
+        })
+      } catch (error) {
+        const httpError = createHttpError(
+          error.statusCode,
+          `[Error actualizando colaborador_puesto] - [colaborador_puesto - UPDATE]: ${error.message}`,
         )
         next(httpError)
       }

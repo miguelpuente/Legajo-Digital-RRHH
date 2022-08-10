@@ -22,16 +22,16 @@ module.exports = {
         }
       },
       fecha_pedido: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       fecha_inicio: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       fecha_fin: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       fecha_incorporacion: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       completado: {
         type: Sequelize.BOOLEAN

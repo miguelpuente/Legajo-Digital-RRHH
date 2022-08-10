@@ -16,6 +16,7 @@ const familiares = require('./familiares/familiares.router')
 const colaboradores = require('./colaboradores/colaboradores.router')
 const licencias_tipos = require('./licencias_tipos/licencias_tipos.router')
 const motivos_inactividades = require('./motivos_inactividades/motivos_inactividades.router')
+const datos_laborales = require('./datos_laborales/datos_laborales.router')
 
 const router = express.Router()
 
@@ -28,7 +29,7 @@ router.use('/sectores', sectores)
 router.use('/puestos', puestos)
 router.use('/sindicatos', sindicatos)
 router.use('/categorias', categorias)
-router.use('/colaboradorpuesto', colaboradores_puestos)
+router.use('/colaboradorespuestos', colaboradores_puestos)
 router.use('/estadosciviles', estados_civiles)
 router.use('/sexos', sexos)
 router.use('/relacionesfamiliares', relaciones_familiares)
@@ -36,5 +37,6 @@ router.use('/familiares', familiares)
 router.use('/colaboradores', colaboradores)
 router.use('/licenciastipos', licencias_tipos)
 router.use('/motivosinactividades', motivos_inactividades)
+router.use('/datoslaborales', datos_laborales)
 
 module.exports = router

@@ -22,15 +22,16 @@ module.exports = {
         }
       },
       fecha_inicio: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       fecha_fin: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY,
+        defaultValue: null
       },
       activo: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Datos_Laboral.belongsTo( models.Motivos_Inactividad ,{ as: 'baja', foreignKey: 'motivo_inactividad_id' })
+      Datos_Laboral.belongsTo( models.Colaborador ,{ as: 'colaborador', foreignKey: 'colaborador_id' })
     }
   }
   Datos_Laboral.init({
@@ -22,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     colaborador_id: DataTypes.UUID,
     nro_legajo: DataTypes.INTEGER,
-    fecha_ingreso: DataTypes.DATE,
+    fecha_ingreso: DataTypes.DATEONLY,
     telefono: DataTypes.STRING,
     email: DataTypes.STRING,
-    fecha_inactividad: DataTypes.DATE,
+    fecha_inactividad: DataTypes.DATEONLY,
     motivo_inactividad_id: DataTypes.UUID
   }, {
     sequelize,
@@ -35,4 +37,4 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true
   });
   return Datos_Laboral;
-};
+}
