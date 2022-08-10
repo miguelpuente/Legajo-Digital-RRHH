@@ -5,11 +5,6 @@ const logger = require('morgan')
 const cors = require('cors')
 require('dotenv').config()
 
-// Documentation Swagger Interface
-const { serve, setup } = require('swagger-ui-express')
-const { configSwagger } = require('./src/config/configSwagger')
-const swaggerJSDocs = require('swagger-jsdoc')(configSwagger)
-
 const indexRouter = require('./src/modules/routersIndex')
 
 const port = process.env.PORT
@@ -28,7 +23,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
-app.use('/api/docs', serve, setup(swaggerJSDocs))
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

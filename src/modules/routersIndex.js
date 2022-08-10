@@ -1,4 +1,5 @@
 const express = require('express')
+const swagger = require('./swagger/routes/swagger.router')
 const auth = require('./auth/router/auth')
 const users = require('./users/users.router')
 const empresas = require('./empresas/empresas.router')
@@ -20,6 +21,7 @@ const datos_laborales = require('./datos_laborales/datos_laborales.router')
 
 const router = express.Router()
 
+router.use('/api/docs', swagger)
 router.use('/auth', auth)
 router.use('/users', users)
 router.use('/empresas', empresas)
