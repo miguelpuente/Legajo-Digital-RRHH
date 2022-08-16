@@ -64,6 +64,18 @@ exports.colaborador = {
         errorMessage: 'Falta apellido',
     },
   },
+  fecha_nacimiento: {
+    isDate: { errorMessage: 'fecha_inactividad no es Date' },
+    exists: {
+      errorMessage: 'Falta fecha_inactividad',
+    },
+  },
+  cuil: {
+    isString: { errorMessage: 'Cuil no es string' },
+    exists: {
+      errorMessage: 'Falta CUIL',
+    },
+  },
   telefono: {
     isString: { errorMessage: 'telefono no es string' },
     exists: {

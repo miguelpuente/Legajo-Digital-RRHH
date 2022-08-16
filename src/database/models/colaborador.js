@@ -36,6 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     estado_civil_id: DataTypes.UUID,
     nombre: DataTypes.STRING,
     apellido: DataTypes.STRING,
+    fecha_nacimiento: DataTypes.DATEONLY,
+    cuil: DataTypes.STRING,
     telefono: DataTypes.STRING,
     email: DataTypes.STRING,
     activo: {

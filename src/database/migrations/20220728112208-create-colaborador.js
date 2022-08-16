@@ -69,6 +69,12 @@ module.exports = {
       apellido: {
         type: Sequelize.STRING
       },
+      fecha_nacimiento: {
+        type: Sequelize.DATEONLY
+      },
+      cuil: {
+        type: Sequelize.STRING
+      },
       telefono: {
         type: Sequelize.STRING
       },

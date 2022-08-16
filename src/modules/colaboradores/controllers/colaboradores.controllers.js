@@ -55,23 +55,6 @@ module.exports = {
         next(httpError)
       }
     }),
-
-    registerColaboradorPuesto: catchAsync(async (req, res, next) => {
-      try {
-        const colaborador_puesto = await createColaboradorPuesto(req)
-        endpointResponse({
-          res,
-          message: 'Colaborador_puesto actualizado exitosamente',
-          body: colaborador_puesto,
-        })
-      } catch (error) {
-        const httpError = createHttpError(
-          error.statusCode,
-          `[Error actualizando colaborador_puesto] - [colaborador_puesto - UPDATE]: ${error.message}`,
-        )
-        next(httpError)
-      }
-    }),
   
     update: catchAsync(async (req, res, next) => {
       try {
@@ -108,4 +91,3 @@ module.exports = {
     }),
   
   }
-  
