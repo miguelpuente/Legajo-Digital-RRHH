@@ -4,6 +4,7 @@
   "description": "Módulo legajo digital. RRHH",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "author": "Miguel Puente",

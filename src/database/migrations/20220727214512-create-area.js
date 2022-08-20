@@ -10,7 +10,7 @@ module.exports = {
       empresa_id: {
         type: Sequelize.UUID,
         references: {
-          model: "empresas",
+          model: "Empresas",
           key: "id"
         }
       },

@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
-const config = require('../config/config')
+const env = process.env.NODE_ENV || 'development'
+const config = require('../config/config')[env]
 
 const generateToken = (user) => new Promise((resolve, reject) => {
-  jwt.sign({ user }, config.development.keyJWT, {expiresIn: '4h'}, (err, token) => {
+  jwt.sign({ user }, config.keyJWT, {expiresIn: '4h'}, (err, token) => {
     if (err) {
       reject(err)
     } else {
@@ -13,7 +14,7 @@ const generateToken = (user) => new Promise((resolve, reject) => {
 
 const decodeToken = (token) => {
   try {
-    const { user } = jwt.verify(token, config.development.keyJWT)
+    const { user } = jwt.verify(token, config.keyJWT)
     return user
   } catch (error) {
     return error

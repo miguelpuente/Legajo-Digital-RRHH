@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const { ErrorObject } = require('../../../helpers/error')
 const { Users } = require('../../../database/models')
-const { generateToken} = require('../../../middlewares/jwt')
+const { generateToken} = require('../../../helpers/jwt')
 
 exports.getAllUsers = async () => {
   const users = await Users.findAll({
@@ -86,4 +86,3 @@ exports.destroyUser = async (id) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
-

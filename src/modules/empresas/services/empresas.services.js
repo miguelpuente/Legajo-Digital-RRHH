@@ -22,20 +22,13 @@ exports.getEmpresaByPk = async (id) => {
 
 exports.createEmpresa = async (body) => {
   try {
-    const esCuit = this.verifyCuit(body.cuit)
-    if (esCuit) {
-      const existeEmpresa = await this.getEmpresaByCuit(body.cuit)
-      if (existeEmpresa) {
-        throw new ErrorObject('CUIT ya fue registrado', 404)
-      }
+    if (!this.verifyCuit(body.cuit)) throw new ErrorObject('CUIT no válido', 404)
+      if (await this.getEmpresaByCuit(body.cuit)) throw new ErrorObject('CUIT ya fue registrado', 404)
       const newEmpresa = await Empresa.create(body)
       if (!newEmpresa) {
         throw new ErrorObject('Falló registro de empresa', 404)
       }
       return newEmpresa
-    } else {
-      throw new ErrorObject('CUIT no válido', 404)
-    }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

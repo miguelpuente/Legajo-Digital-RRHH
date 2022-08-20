@@ -17,7 +17,7 @@ module.exports = {
       licencia_tipo: {
         type: Sequelize.UUID,
         references: {
-          model: "RRHH_Licencia_tipos",
+          model: "RRHH_Licencia_Tipos",
           key: "id"
         }
       },
