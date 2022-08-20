@@ -40,7 +40,7 @@ app.use((err, req, res) => {
   res.render('error')
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3030, () => {
   // eslint-disable-next-line no-console
   console.log(`Servidor funcionando en el puerto ${process.env.PORT}`)
 })
