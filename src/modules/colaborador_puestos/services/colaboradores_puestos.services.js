@@ -11,11 +11,8 @@ exports.getAllColaboradores_Puestos = async () => {
 exports.getColaborador_PuestoByPk = async (id) => {
   try {
     const colaboradorPuesto = await Colaborador_Puesto.findByPk( id )
-    if (colaboradorPuesto) {
-      return colaboradorPuesto
-    } else {
-      throw new ErrorObject('colaboradorPuesto no existe', 404)
-    }
+    if (!colaboradorPuesto) throw new ErrorObject('colaboradorPuesto no existe', 404)
+    return colaboradorPuesto
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -28,11 +25,13 @@ exports.createColaboradorPuesto = async (body) => {
     if (!(await getPuestoByPk( body.puesto_id ))) throw new ErrorObject('puesto_id no existe', 404)
 
     if ((await this.getAsociacionColaboradorPuesto(body.colaborador_id, body.puesto_id))) throw new ErrorObject('Ya existe asociación', 404)
+
     const colaboradorPuesto = new Colaborador_Puesto()
     colaboradorPuesto.colaborador_id = body.colaborador_id
     colaboradorPuesto.puesto_id = body.puesto_id
     colaboradorPuesto.fecha_inicio = body.fecha_inicio
     const newColaboradorPuesto = await colaboradorPuesto.save()
+
     if (!newColaboradorPuesto) throw new ErrorObject('Falló registro de Colaborador Puesto', 404)
     return this.getColaborador_PuestoByPk(newColaboradorPuesto.id)
   } catch (error) {
@@ -72,8 +71,9 @@ exports.updateColaborador_PuestoById = async (req) => {
 
 exports.bajaByColaboradorByPuesto = async (req) => {
   const colaboradorPuesto = await this.getAsociacionColaboradorPuesto(req.body.colaborador_id, req.body.puesto_id)
-  console.log(req.body)
+  console.log(colaboradorPuesto)
   if (!colaboradorPuesto) throw new ErrorObject('colaboradorPuesto no existe', 404)
+  console.log('------------------',colaboradorPuesto)
   if (colaboradorPuesto.fecha_inicio > req.body.fecha_fin) throw new ErrorObject('fecha_fin debe ser posterior a fecha_inicio', 404)
   colaboradorPuesto.fecha_fin = req.body.fecha_fin
   colaboradorPuesto.activo = false
@@ -95,6 +95,7 @@ exports.destroyColaborador_Puesto = async (id) => {
 exports.getAsociacionColaboradorPuesto = async (colaborador_id, puesto_id) => {
   try {
     const colaboradorPuesto = await Colaborador_Puesto.findOne({where: { colaborador_id:colaborador_id, puesto_id:puesto_id }})
+    if (!colaboradorPuesto) throw new ErrorObject('colaboradorPuesto no existe', 404)
     return colaboradorPuesto
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)

@@ -9,8 +9,8 @@ router.get('/', list)
 router.get('/:id', schemaValidator(uuid), show)
 router.get('/colaborador/:id', schemaValidator(uuid), showPuestosxColaborador)
 router.post('/', schemaValidator(colaborador_puesto), register)
-router.put('/:id', schemaValidator(colaborador_puesto), update)
 router.put('/baja', schemaValidator(baja), bajaColaboradorPuesto)
+router.put('/:id', schemaValidator(colaborador_puesto), update)
 router.delete('/:id', schemaValidator(uuid), destroy)
 
 module.exports = router
