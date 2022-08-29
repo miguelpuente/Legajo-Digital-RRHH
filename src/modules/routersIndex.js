@@ -18,6 +18,7 @@ const colaboradores = require('./colaboradores/colaboradores.router')
 const licencias_tipos = require('./licencias_tipos/licencias_tipos.router')
 const motivos_inactividades = require('./motivos_inactividades/motivos_inactividades.router')
 const datos_laborales = require('./datos_laborales/datos_laborales.router')
+const reemplazos = require('./reemplazos/reemplazos.router')
 
 const router = express.Router()
 
@@ -40,5 +41,6 @@ router.use('/colaboradores', colaboradores)
 router.use('/licenciastipos', licencias_tipos)
 router.use('/motivosinactividades', motivos_inactividades)
 router.use('/datoslaborales', datos_laborales)
+router.use('/reemplazos', reemplazos)
 
 module.exports = router

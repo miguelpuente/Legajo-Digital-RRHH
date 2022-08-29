@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Reemplazo extends Model {
     /**
@@ -28,6 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'RRHH_Reemplazos',
     timestamps: true,
     paranoid: true
-  });
-  return Reemplazo;
-};
+  })
+  return Reemplazo
+}
