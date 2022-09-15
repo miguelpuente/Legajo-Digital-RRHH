@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Empresa.hasMany( models.Area, { as: 'areas', foreignKey:'empresa_id' })
-      Empresa.hasMany( models.Sucursal, { as: 'sucursales', foreignKey: 'empresa_id' })
-      Empresa.hasMany( models.Sector, { as: 'sectores', foreignKey:'empresa_id' })
-      Empresa.hasMany( models.Puesto, { as: 'puestos', foreignKey:'empresa_id' })
-      Empresa.belongsToMany( models.Sindicato, { through: 'rrhh_empresas_sindicatos', foreignKey: 'empresa_id' } )
-      Empresa.hasMany( models.Empresas_Sindicato, {foreignKey:'empresa_id' })
+      this.belongsToMany( models.Sindicato, { through: 'rrhh_empresas_sindicatos', foreignKey: 'empresa_id' })
+      this.hasOne( models.Domicilio, { as: 'domicilio', foreignKey: 'relacion_id', constraints: false, scope: { relacion_type: 'empresas'}})
+      this.hasMany( models.Area, { as: 'areas', foreignKey:'empresa_id' })
+      this.hasMany( models.Sucursal, { as: 'sucursales', foreignKey: 'empresa_id' })
+      this.hasMany( models.Sector, { as: 'sectores', foreignKey:'empresa_id' })
+      this.hasMany( models.Puesto, { as: 'puestos', foreignKey:'empresa_id' })
+      this.hasMany( models.Empresas_Sindicato, {foreignKey:'empresa_id' })
     }
   }
   Empresa.init({

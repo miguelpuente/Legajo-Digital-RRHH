@@ -10,11 +10,8 @@ exports.getAllEmpresas = async () => {
 exports.getEmpresaByPk = async (id) => {
   try {
     const empresa = await Empresa.findByPk( id )
-    if (empresa) {
-      return empresa
-    } else {
-      throw new ErrorObject('Empresa no existe', 404)
-    }
+    if (empresa) return empresa
+    throw new ErrorObject('Empresa no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -25,10 +22,8 @@ exports.createEmpresa = async (body) => {
     if (!this.verifyCuit(body.cuit)) throw new ErrorObject('CUIT no válido', 404)
       if (await this.getEmpresaByCuit(body.cuit)) throw new ErrorObject('CUIT ya fue registrado', 404)
       const newEmpresa = await Empresa.create(body)
-      if (!newEmpresa) {
-        throw new ErrorObject('Falló registro de empresa', 404)
-      }
-      return newEmpresa
+      if (newEmpresa) return newEmpresa
+      throw new ErrorObject('Falló registro de empresa', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -94,11 +89,8 @@ exports.updateEmpresaById = async (req) => {
 exports.destroyEmpresa = async (id) => {
   try {
     const empresa = await Empresa.findByPk(id)
-    if (empresa) {
-      await Empresa.destroy({ where: { id: empresa.id } })
-    } else {
-      throw new ErrorObject('Empresa no existe', 404)
-    }
+    if (empresa) return await Empresa.destroy({ where: { id: empresa.id } })
+    throw new ErrorObject('Empresa no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -106,18 +98,10 @@ exports.destroyEmpresa = async (id) => {
 
 exports.createEmpresaSindicato = async (empresa_id, sindicato_id) => {
   try {
-    if (!(await getSindicatoByPk(sindicato_id))) {
-      throw new ErrorObject('Sindicato no existe', 404)
-    }
-    if (!(await this.getEmpresaByPk(empresa_id))) {
-      throw new ErrorObject('Empresa no existe', 404)
-    }
-    if (!(await this.getAsociacionEmpresaSindicato(empresa_id, sindicato_id))) {
-      const empresaSindicato = await Empresas_Sindicato.create({empresa_id, sindicato_id})
-      return empresaSindicato
-    } else {
-      throw new ErrorObject('Ya existe asociación', 404)
-    }
+    if (!(await getSindicatoByPk(sindicato_id))) throw new ErrorObject('Sindicato no existe', 404)
+    if (!(await this.getEmpresaByPk(empresa_id))) throw new ErrorObject('Empresa no existe', 404)
+    if (await this.getAsociacionEmpresaSindicato(empresa_id, sindicato_id)) throw new ErrorObject('Ya existe asociación', 404)
+    return await Empresas_Sindicato.create({empresa_id, sindicato_id})
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -125,12 +109,8 @@ exports.createEmpresaSindicato = async (empresa_id, sindicato_id) => {
 
 exports.getSindicatoByEmpresaPk = async (empresa_id) => {
   try {
-    if ((await this.getEmpresaByPk(empresa_id))) {
-      const sindicatos = await Empresas_Sindicato.findAll({where: { empresa_id }})
-      return sindicatos
-    } else {
-      throw new ErrorObject('Empresa no existe', 404)
-    }
+    if (!(await this.getEmpresaByPk(empresa_id))) throw new ErrorObject('Empresa no existe', 404)
+      return await Empresas_Sindicato.findAll({where: { empresa_id }})
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -138,8 +118,7 @@ exports.getSindicatoByEmpresaPk = async (empresa_id) => {
 
 exports.getAsociacionEmpresaSindicato = async (empresa_id, sindicato_id) => {
   try {
-    const empresaSindicato = await Empresas_Sindicato.findOne({where: { empresa_id, sindicato_id}})
-    return empresaSindicato
+    return await Empresas_Sindicato.findOne({where: { empresa_id, sindicato_id}})
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -148,11 +127,8 @@ exports.getAsociacionEmpresaSindicato = async (empresa_id, sindicato_id) => {
 exports.destroyEmpresaSindicato = async (empresa_id, sindicato_id) => {
   try {
     const empresaSindicato = await Empresas_Sindicato.findOne({where: { empresa_id, sindicato_id}})
-    if (empresaSindicato) {
-      await Empresas_Sindicato.destroy({ where: { id: empresaSindicato.id } })
-    } else {
-      throw new ErrorObject('Empresa-Sindicato no existe', 404)
-    }
+    if (empresaSindicato) return await Empresas_Sindicato.destroy({ where: { id: empresaSindicato.id } })
+    throw new ErrorObject('Empresa-Sindicato no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

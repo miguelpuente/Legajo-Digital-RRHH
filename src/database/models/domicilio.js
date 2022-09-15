@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Domicilio extends Model {
     /**
@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo( models.Localidad, { as: 'localidad', foreignKey: 'localidad_id'})
+      this.belongsTo( models.Colaborador, { as: 'colaborador_localizacion', foreignKey: 'relacion_id', constraints: false})
+      this.belongsTo( models.Empresa, { as: 'empresa_localizacion', foreignKey: 'relacion_id', constraints: false})
+      this.belongsTo( models.Sucursal, { as: 'sucursal_localizacion', foreignKey: 'relacion_id', constraints: false})
+      this.belongsTo( models.Sindicato, { as: 'sindicato_localizacion', foreignKey: 'relacion_id', constraints: false})
     }
   }
   Domicilio.init({
@@ -38,6 +43,6 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Domicilio',
     timestamps: true,
     paranoid: true
-  });
-  return Domicilio;
-};
+  })
+  return Domicilio
+}

@@ -4,8 +4,7 @@ const { getColaboradorByPk } = require('../../colaboradores/services/colaborador
 const { getMotivo_InactividadByPk } = require('../../motivos_inactividades/services/motivos_inactividades.services')
 
 exports.getAllDatos_Laborales = async () => {
-  const datos_laborales = await Datos_Laboral.findAll()
-  return datos_laborales
+  return await Datos_Laboral.findAll()
 }
 
 exports.getDato_LaboralByPk = async (id) => {

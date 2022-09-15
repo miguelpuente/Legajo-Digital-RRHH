@@ -11,8 +11,8 @@ exports.getAllReemplazos = async () => {
 exports.getReemplazoByPk = async (id) => {
   try {
     const reemplazo = await Reemplazo.findByPk( id )
-    if (!reemplazo) throw new ErrorObject('Reemplazo no existe', 404)
-    return reemplazo
+    if (reemplazo) return reemplazo
+    throw new ErrorObject('Reemplazo no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -56,11 +56,8 @@ exports.updateReemplazoById = async (req) => {
 exports.destroyReemplazo = async (id) => {
   try {
     const reemplazo = await Reemplazo.findByPk(id)
-    if (reemplazo) {
-      await Reemplazo.destroy({ where: { id: id } })
-    } else {
-      throw new ErrorObject('Area no existe', 404)
-    }
+    if (reemplazo) return await Reemplazo.destroy({ where: { id: id } })
+    throw new ErrorObject('Reemplazo no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

@@ -10,11 +10,8 @@ exports.getAllCategorias = async () => {
 exports.getCategoriaByPk = async (id) => {
   try {
     const categoria = await Categoria.findByPk( id )
-    if (categoria) {
-      return categoria
-    } else {
-      throw new ErrorObject('Categoria no existe', 404)
-    }
+    if (categoria) return categoria
+    throw new ErrorObject('Categoria no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -69,11 +66,8 @@ exports.updateCategoriaById = async (req) => {
 exports.destroyCategoria = async (id) => {
   try {
     const categoria = await Categoria.findByPk(id)
-    if (categoria) {
-      await Categoria.destroy({ where: { id: categoria.id } })
-    } else {
-      throw new ErrorObject('Categoria no existe', 404)
-    }
+    if (categoria) throw new ErrorObject('Categoria no existe', 404)
+    await Categoria.destroy({ where: { id: categoria.id } })
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

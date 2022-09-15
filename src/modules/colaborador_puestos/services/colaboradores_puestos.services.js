@@ -73,7 +73,6 @@ exports.bajaByColaboradorByPuesto = async (req) => {
   const colaboradorPuesto = await this.getAsociacionColaboradorPuesto(req.body.colaborador_id, req.body.puesto_id)
   console.log(colaboradorPuesto)
   if (!colaboradorPuesto) throw new ErrorObject('colaboradorPuesto no existe', 404)
-  console.log('------------------',colaboradorPuesto)
   if (colaboradorPuesto.fecha_inicio > req.body.fecha_fin) throw new ErrorObject('fecha_fin debe ser posterior a fecha_inicio', 404)
   colaboradorPuesto.fecha_fin = req.body.fecha_fin
   colaboradorPuesto.activo = false

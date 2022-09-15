@@ -3,18 +3,14 @@ const { Area } = require('../../../database/models')
 const { getEmpresaByPk } = require('../../empresas/services/empresas.services')
 
 exports.getAllAreas = async () => {
-  const area = await Area.findAll()
-  return area
+  return await Area.findAll()
 }
 
 exports.getAreaByPk = async (id) => {
   try {
     const area = await Area.findByPk( id )
-    if (area) {
-      return area
-    } else {
-      throw new ErrorObject('Area no existe', 404)
-    }
+    if (area) return area
+    throw new ErrorObject('Area no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -30,9 +26,9 @@ exports.createArea = async (body) => {
     area.nombre = body.nombre
     const newArea = await area.save()
 
-    if (!newArea) throw new ErrorObject('Falló registro de area', 404)
+    if (newArea) return newArea
 
-    return newArea
+    throw new ErrorObject('Falló registro de area', 404)
 
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
@@ -41,8 +37,7 @@ exports.createArea = async (body) => {
 
 exports.getAreaByEmpresaId = async (empresaId) => {
   try {
-    const area = await Area.findAll({ where: { empresaId } })
-    return area
+    return await Area.findAll({ where: { empresaId } })
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -62,8 +57,7 @@ exports.updateAreaById = async (req) => {
     if (!area) throw new ErrorObject('Area no existe', 404)
 
     await Area.update({ empresa_id, nombre, activo, },{ where: { id: area.id } },)
-    const newArea = await Area.findByPk(id)
-    return newArea
+    return await Area.findByPk(id)
 
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
@@ -73,11 +67,8 @@ exports.updateAreaById = async (req) => {
 exports.destroyArea = async (id) => {
   try {
     const area = await Area.findByPk(id)
-    if (area) {
-      await Area.destroy({ where: { id: area.id } })
-    } else {
-      throw new ErrorObject('Area no existe', 404)
-    }
+    if (area) throw new ErrorObject('Area no existe', 404)
+    return await Area.destroy({ where: { id: area.id } })
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

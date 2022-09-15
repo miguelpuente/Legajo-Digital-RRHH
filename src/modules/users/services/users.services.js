@@ -4,18 +4,16 @@ const { Users } = require('../../../database/models')
 const { generateToken} = require('../../../helpers/jwt')
 
 exports.getAllUsers = async () => {
-  const users = await Users.findAll({
+  return await Users.findAll({
     attributes: ['id', 'email', 'avatar'],
   })
-  return users
 }
 
 exports.getUserByPk = async (id) => {
   try {
-    const user = await Users.findByPk( id, {
+    return await Users.findByPk( id, {
       attributes: ['id', 'email', 'avatar']
     })
-    return user
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -23,8 +21,7 @@ exports.getUserByPk = async (id) => {
 
 exports.getUserByEmail = async (email) => {
   try {
-    const user = await Users.findOne({ where: { email } })
-    return user
+    return await Users.findOne({ where: { email } })
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -41,15 +38,11 @@ exports.getPassword = (myPlaintextPassword, hash) => {
 exports.createUser = async (body) => {
   try {
     const existeUser = await this.getUserByEmail(body.email)
-    if (existeUser) {
-      throw new ErrorObject('Email ya fue registrado', 404)
-    }
+    if (existeUser) throw new ErrorObject('Email ya fue registrado', 404)
     const hashedPassword = await bcrypt.hash(body.password, 10)
     body.password = hashedPassword
     const newUser = await Users.create(body)
-    if (!newUser) {
-      throw new ErrorObject('Falló registro de usuario', 404)
-    }
+    if (!newUser) throw new ErrorObject('Falló registro de usuario', 404)
     const token = await generateToken(newUser)
     return ({Authorization: token})
   } catch (error) {
@@ -76,12 +69,8 @@ exports.createLogin = async (email, password) => {
 
 exports.destroyUser = async (id) => {
   try {
-    const user = await Users.findByPk(id)
-    if (user) {
-      await Users.destroy({ where: { id: user.id } })
-    } else {
-      throw new ErrorObject('Usuario no existe', 404)
-    }
+    if (await Users.findByPk(id)) return await Users.destroy({ where: { id: id } })
+    throw new ErrorObject('Usuario no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

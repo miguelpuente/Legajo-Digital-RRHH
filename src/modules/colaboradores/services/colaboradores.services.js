@@ -10,18 +10,14 @@ const { getEstado_CivilByPk } = require('../../estados_civiles/services/estados_
 const { verifyCuit } = require('../../empresas/services/empresas.services')
 
 exports.getAllColaboradores = async () => {
-  const colaboradores = await Colaborador.findAll()
-  return colaboradores
+  return await Colaborador.findAll()
 }
 
 exports.getColaboradorByPk = async (id) => {
   try {
     const colaborador = await Colaborador.findByPk( id )
-    if (colaborador) {
-      return colaborador
-    } else {
-      throw new ErrorObject('Colaborador no existe', 404)
-    }
+    if (colaborador) return colaborador
+    throw new ErrorObject('Colaborador no existe', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -29,8 +25,7 @@ exports.getColaboradorByPk = async (id) => {
 
 exports.getColaboradorByCuil = async (cuil) => {
   try {
-    const colaborador = await Colaborador.findOne({ where: { cuil } })
-    return colaborador
+    return await Colaborador.findOne({ where: { cuil } })
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -67,8 +62,7 @@ exports.createColaborador = async (body) => {
     colaborador.telefono = body.telefono
     colaborador.email = body.email
 
-    const newColaborador = await colaborador.save()
-    return newColaborador
+    return await colaborador.save()
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -97,9 +91,7 @@ exports.updateColaboradorById = async (req) => {
 
     await Colaborador.update({ user_id, sucursal_id, sector_id, area_id, superior_id, categoria_id, sexo_id, estado_civil_id, nombre, apellido, fecha_nacimiento, cuil, telefono, email, activo, },{ where: { id: id } },)
 
-    const newColaborador = await Colaborador.findByPk(id)
-
-    return newColaborador
+    return await Colaborador.findByPk(id)
 
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
@@ -109,11 +101,8 @@ exports.updateColaboradorById = async (req) => {
 exports.destroyColaborador = async (id) => {
   try {
     const colaborador = await Colaborador.findByPk(id)
-    if (colaborador) {
-      await Colaborador.destroy({ where: { id: colaborador.id } })
-    } else {
-      throw new ErrorObject('Colaborador no existe', 404)
-    }
+    if (!colaborador) throw new ErrorObject('Colaborador no existe', 404)
+    await Colaborador.destroy({ where: { id: colaborador.id } })
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

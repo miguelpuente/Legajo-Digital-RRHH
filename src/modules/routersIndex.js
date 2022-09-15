@@ -19,10 +19,13 @@ const licencias_tipos = require('./licencias_tipos/licencias_tipos.router')
 const motivos_inactividades = require('./motivos_inactividades/motivos_inactividades.router')
 const datos_laborales = require('./datos_laborales/datos_laborales.router')
 const reemplazos = require('./reemplazos/reemplazos.router')
+//const colaboradores_licencias = require('./colaborador_licencias/colaboradores_licencias.router')
+const file = require('./file/file.router')
 
 const router = express.Router()
 
 router.use('/api/docs', swagger)
+router.use('/archivo', file)
 router.use('/auth', auth)
 router.use('/users', users)
 router.use('/empresas', empresas)
@@ -42,5 +45,6 @@ router.use('/licenciastipos', licencias_tipos)
 router.use('/motivosinactividades', motivos_inactividades)
 router.use('/datoslaborales', datos_laborales)
 router.use('/reemplazos', reemplazos)
+//router.use('/colaboradoreslicencias', colaboradores_licencias)
 
 module.exports = router

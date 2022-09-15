@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const logger = require('morgan')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 require('dotenv').config()
 
 const indexRouter = require('./src/modules/routersIndex')
@@ -18,6 +19,10 @@ app.set('view engine', 'ejs')
 
 app.use(logger('dev'))
 app.use(express.json())
+app.use(fileUpload({
+  limits: { fileSize: process.env.MAXSIZEUPLOAD * 1024 * 1024 },
+  createParentPath: true,
+}))
 app.use(express.urlencoded({ extended: false }))
 // app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))

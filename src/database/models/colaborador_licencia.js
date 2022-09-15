@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     colaborador_id: DataTypes.UUID,
-    licencia_tipo: DataTypes.UUID,
+    licencia_tipo_id: DataTypes.UUID,
     fecha_pedido: DataTypes.DATEONLY,
     fecha_inicio: DataTypes.DATEONLY,
     fecha_fin: DataTypes.DATEONLY,
